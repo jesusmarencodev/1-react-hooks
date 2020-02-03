@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import uuid from 'uuid/v4';
 
-export default function Form() {
+export default function Form({createAppointment}) {
   const [appointment, setAppointment] = useState({
     pet:'',
     owner:'',
@@ -31,13 +31,24 @@ export default function Form() {
       setError(true);
       return console.log("Error, fill in all fields");
     } 
+    
     //Delete error message
     setError(false);
+
     //Assign id
     appointment.id = uuid();
+
     //Create appointment
-    console.log(appointment);
+    createAppointment(appointment);
+
     //empty the form
+    setAppointment({
+      pet:'',
+      owner:'',
+      date:'',
+      time:'',
+      symptoms:''
+    })
 
 
   }
