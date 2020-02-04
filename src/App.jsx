@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import Form from './components/Form';
 import Appointment from './components/Appointment';
 
+
 function App() {
 
   //appointment in localStorage
@@ -15,12 +16,13 @@ function App() {
 
   //useEffect is used to perform operation when the state changes
   useEffect( ()=> {
+    let initialAppointment = JSON.parse(localStorage.getItem('appointments'));
+    
     if(initialAppointment){
       localStorage.setItem('appointments', JSON.stringify(appointments));
     }else{
       localStorage.setItem('appointments', JSON.stringify([]));
     }
-
   }, [appointments]);//para decirle a useEfect que se ejecute una vez hay que pasarle un arreglo vacio,
   //si le pasamos a useEffect un array el se ejecutara cada que el array cambie
 
@@ -35,7 +37,7 @@ function App() {
      setAppointment(newAppointment);
    }
    //conditional message
-   const title = appointments.length === 0 ?  'No hay citas'    : 'Manage your appointment'
+   const title = appointments.length === 0 ?  'No appointment'    : 'Manage your appointment'
 
   return (
       <Fragment>
@@ -63,5 +65,6 @@ function App() {
       </Fragment>
   );
 }
+
 
 export default App;
